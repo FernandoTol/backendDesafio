@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
 
+
 const publicationsSchema = new mongoose.Schema({
-    usuario: {
-        type: String,
-        required: true,
-        minLength: 3,
-        maxLength: 100,
-        trim: true
-    },
+    user: { type: Schema.Types.ObjectId, ref: 'users' },
     title: {
         type: String,
         required: true,
@@ -33,10 +28,7 @@ const publicationsSchema = new mongoose.Schema({
         type: Array,
         required: false
     },
-    comentarios: {
-        type: Array,
-        required: false
-    }
+    comentarios: [{ type: Schema.Types.ObjectId, ref: 'comentarios' }]
 })
 
 const Publication = mongoose.model('publications', publicationsSchema)
