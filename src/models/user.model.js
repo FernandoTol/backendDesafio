@@ -17,7 +17,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    imagenAvatar: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    // * Agregar campos
 })
 
 const User = mongoose.model('users', userSchema)

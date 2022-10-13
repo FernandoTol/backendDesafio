@@ -15,11 +15,6 @@ const publicationsSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    imagenAvatar: {
-        type: String,
-        required: true,
-        trim: true
-    },
     contenido: {
         type: String,
         required: true,
