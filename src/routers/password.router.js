@@ -1,5 +1,5 @@
 import express from 'express'
-import * as passCases from '../useCase/user.case.js'
+import * as passCases from '../useCase/user.password.js'
 
 const router = express.Router()
 
