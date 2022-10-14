@@ -89,7 +89,7 @@ router.delete( '/:idPost',autoritation, async ( req, res )=>{
     }
 })
 
-router.patch( '/:idPost',auth, async ( req, res )=>{
+router.patch( '/:idPost',autoritation, async ( req, res )=>{
     try{
         const updateUser = req.body
         const { idPost } = req.params
