@@ -5,9 +5,9 @@ const getAll = () => User.find({})
 
 const create = async (newUser) => {
     // modificar
-    const { email, password } = newUser
+    const { correo, password } = newUser
 
-    const UserFound = await User.findOne({email})
+    const UserFound = await User.findOne({correo})
 
     if(UserFound) throw new Error('This User already exist!')
 
