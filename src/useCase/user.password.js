@@ -1,6 +1,7 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "../libs/bcrypt.js";
-import jwt from "../libs/jwt.js";
+import jwt from "../libs/token.js";
+
 const login = async (email, password) => {
 
     const userFound = await User.findOne({email})

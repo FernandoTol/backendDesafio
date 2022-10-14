@@ -53,9 +53,6 @@ router.post("/", async (request, response) => {
     try {
         const newUser = request.body;
         console.log(newUser);
-        if (newUser.email) {
-            throw new StatusHttp("This user already exist!");
-        }
         const userCreated = await userCases.create(newUser);
 
         console.log(userCreated);
@@ -66,6 +63,10 @@ router.post("/", async (request, response) => {
         });
     } catch (error) {
         console.log(error);
+        response.json({
+            succes: false,
+            message: error.message
+        });
     }
 });
 
