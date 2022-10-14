@@ -68,25 +68,7 @@ router.post("/", async (request, response) => {
         console.log(error);
     }
 });
-// router.post('/', async(request, response) => {
-//     try {
-//         const {body: newKoder} = request
-//         console.log(request)
-//         // await kodersUsesCases.create(newKoder)
 
-//         response.json({
-//             success: true,
-//             message: 'Koder creado!'
-//         })
-//     } catch (error) {
-//         // PENDING: reemplazar por el middleware del handleErrors
-//         response.status(400)
-//         response.json({
-//             success: false,
-//             message: error.message
-//         })
-//     }
-// })
 
 // *Delete
 router.delete("/:idUser", autoritation, async (request, response, next) => {
