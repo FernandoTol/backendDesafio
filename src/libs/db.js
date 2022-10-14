@@ -15,8 +15,6 @@ const URL = `mongodb+srv://${DB_USER}:${DB_PASSWORD}${DB_HOST}/${DB_NAME}?retryW
 
 
 
-function connect() {
-    return mongoose.connect(URL) // regresa una promesa
-}
+const connect = () => mongoose.connect(URL)
 
 export default connect

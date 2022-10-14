@@ -20,9 +20,26 @@ const userSchema = new mongoose.Schema({
     },
     imagenAvatar: {
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
+    initialDate: {
+        type: Date,
+        required: true
+    },
+    nacionality: {
+        type: String,
+        required: true,
+        min: 1,
+        max: 100
+    },
+    biography: {
+        type: String,
+        required: false,
+        minLength: 3,
+        maxLength: 500,
+        trim: true
+    }
     // * Agregar campos
 })
 

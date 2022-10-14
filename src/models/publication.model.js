@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
-
 const publicationsSchema = new mongoose.Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'users' },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     title: {
         type: String,
         required: true,
@@ -23,7 +22,7 @@ const publicationsSchema = new mongoose.Schema({
         type: Array,
         required: false
     },
-    comentarios: [{ type: Schema.Types.ObjectId, ref: 'comentarios' }]
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comentarios' }]
 })
 
 const Publication = mongoose.model('publications', publicationsSchema)

@@ -1,10 +1,19 @@
-import express from 'express'
-import routerpb from './routers/publications.router.js'
+import express from 'express';
+import cors from 'cors'
+import routerpb from './routers/publications.router.js';
+import routerUser from './routers/user.routers.js';
+import errors from "./middlewares/errorServer.js";
+import routerPass from './routers/password.router.js';
 
-const server = express()
+const server = express();
+server.use(cors())
 
 // Routers
-server.use('/publications', routerpb)
+server.use('/publications', routerpb);
+server.use("/user", routerUser);
+server.use("/pass", routerPass);
+
+server.use(errors);
 
 
-export {server}
+export {server};
