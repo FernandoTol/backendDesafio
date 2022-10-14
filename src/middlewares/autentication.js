@@ -6,7 +6,7 @@ const autoritation = (request, response, next) => {
 
         const isValidToken = jwt.verify(token)
         if(!isValidToken) throw new Error('No autorizado')
-
+        request.auth = tokenDecoded.id
         next()
     } catch (error) {
         response.status(401)

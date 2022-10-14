@@ -11,7 +11,7 @@ const publicationsSchema = new mongoose.Schema({
     },
     imagenPortada: {
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     contenido: {
@@ -22,7 +22,11 @@ const publicationsSchema = new mongoose.Schema({
         type: Array,
         required: false
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comentarios' }]
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comentarios' }],
+    date:{
+        type: Date,
+        required: true
+    }
 })
 
 const Publication = mongoose.model('publications', publicationsSchema)

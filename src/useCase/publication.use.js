@@ -1,28 +1,17 @@
 import { Publication } from "../models/publication.model.js"
 //* va .populate
-const publicationsAll = () => Publication.find({}).populate('user')
+const publicationsAll = () => Publication.find({}).populate( 'user ')
 
-async function addComment(newComment, userCurrent) {
-    console.log({ ...newComment, author: userCurrent });
+const getById = ( id ) => Publication.findById( id ).populate( 'user' )
 
-    let commentCreated = await Comment.create({
-        ...newComment,
-        author: userCurrent,
-    });
+const getPostByUserId = ( id ) => Publication.find({ user: id })
 
-    await Post.findByIdAndUpdate(newComment.post_id, {
-        $push: { comments: commentCreated._id },
-    });
+const deleteById = ( id ) =>  Publication.findByIdAndDelete( id )
 
-    return commentCreated;
+const create = async ( newPost, user ) => {
+    const { title, contenido, etiquetas, imagenPortada, date } = newPost
+    return Publication.create({ title, contenido, etiquetas, imagenPortada, date, user })
 }
 
-function deleteById(Publication) {
-    return Comment.findByIdAndDelete(idComment);
-}
 
-function update(idComment, unupdatedComment) {
-    return Comment.findByIdAndUpdate(idComment, unupdatedComment, { new: true })
-}
-
-export { publicationsAll }
+export { publicationsAll, getById, getPostByUserId, deleteById, create }

@@ -5,16 +5,16 @@ const getAll = () => User.find({})
 
 const create = async (newUser) => {
     // modificar
-    const { email, password } = newUser
+    const { correo, password, nombre, initialDate, nacionality } = newUser
 
-    const UserFound = await User.findOne({email})
+    const UserFound = await User.findOne({correo})
 
     if(UserFound) throw new Error('This User already exist!')
 
     // Encriptar el password
     const encryptedPassword = await bcrypt.hash(password)
 
-    return User.create({...newUser, password: encryptedPassword})
+    return User.create({...UserFound, password: encryptedPassword,  nombre, initialDate, nacionality})
 }
 
 const update = (idUser, unupdatedUser) => User.findByIdAndUpdate(idUser, unupdatedUser, {new:true})
