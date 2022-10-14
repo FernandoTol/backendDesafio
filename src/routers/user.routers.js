@@ -49,45 +49,44 @@ router.get("/:idUser", async (request, response, next) => {
 
 
 // *POST
-// router.post("/", async (request, response) => {
-//     try {
-//         const newUser = request.body;
-//         console.log(request);
-//         // if (newUser.email) {
-//         //     throw new StatusHttp("This user already exist!");
-//         // }
-//         // const userCreated = await userCases.create(newUser);
-
-//         // console.log(userCreated);
-//         // response.json({
-//         //     succes: true,
-//         //     message: "user created",
-//         //     data: userCreated,
-//         // });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// });
-
-router.post('/', async(request, response) => {
+router.post("/", async (request, response) => {
     try {
-        const {body: newKoder} = request
-        console.log(request)
-        // await kodersUsesCases.create(newKoder)
+        const newUser = request.body;
+        console.log(newUser);
+        if (newUser.email) {
+            throw new StatusHttp("This user already exist!");
+        }
+        const userCreated = await userCases.create(newUser);
 
+        console.log(userCreated);
         response.json({
-            success: true,
-            message: 'Koder creado!'
-        })
+            succes: true,
+            message: "user created",
+            data: userCreated,
+        });
     } catch (error) {
-        // PENDING: reemplazar por el middleware del handleErrors
-        response.status(400)
-        response.json({
-            success: false,
-            message: error.message
-        })
+        console.log(error);
     }
-})
+});
+// router.post('/', async(request, response) => {
+//     try {
+//         const {body: newKoder} = request
+//         console.log(request)
+//         // await kodersUsesCases.create(newKoder)
+
+//         response.json({
+//             success: true,
+//             message: 'Koder creado!'
+//         })
+//     } catch (error) {
+//         // PENDING: reemplazar por el middleware del handleErrors
+//         response.status(400)
+//         response.json({
+//             success: false,
+//             message: error.message
+//         })
+//     }
+// })
 
 // *Delete
 router.delete("/:idUser", autoritation, async (request, response, next) => {
