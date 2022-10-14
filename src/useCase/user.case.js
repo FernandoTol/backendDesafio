@@ -14,7 +14,7 @@ const create = async (newUser) => {
     // Encriptar el password
     const encryptedPassword = await bcrypt.hash(password)
 
-    return User.create({...newUser, password: encryptedPassword})
+    return User.create( {...newUser, password: encryptedPassword} )
 }
 
 const update = (idUser, unupdatedUser) => User.findByIdAndUpdate(idUser, unupdatedUser, {new:true})
