@@ -1,6 +1,12 @@
 import jwt from 'jsonwebtoken'
+import * as dotenv from 'dotenv'
 
-const JWT_SECRET = 'ndkd7373fdk#%$#%'
+dotenv.config()
+
+const {
+    JWT_SECRET
+} = process.env
+
 
 const sign = (payload) => jwt.sign(payload, JWT_SECRET, { expiresIn: '1d'})
 

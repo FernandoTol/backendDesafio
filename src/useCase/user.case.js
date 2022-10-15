@@ -17,7 +17,7 @@ const create = async (newUser) => {
     return User.create( {...newUser, password: encryptedPassword} )
 }
 
-const update = (idUser, unupdatedUser) => User.findByIdAndUpdate(idUser, unupdatedUser, {new:true})
+const update = (idUser, updatedUser) => User.findByIdAndUpdate(idUser, updatedUser, {new:true})
 
 const getById = (idUser) => User.findById(idUser)
 

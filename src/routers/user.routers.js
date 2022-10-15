@@ -7,7 +7,7 @@ import { autoritation } from "../middlewares/autentication.js";
 
 const router = express.Router();
 
-router.get("/", async (request, response, next) => {
+router.get("/", autoritation, async (request, response, next) => {
     try {
         const { page, limit } = request.query
         const skip = (page - 1) * 10;

@@ -10,7 +10,6 @@ router.get('/', async ( req, res, next ) => {
 
     try {
         const allpub = await publication.publicationsAll()
-        console.log( allpub )
         res.json({
             succes: true,
             data: {
@@ -27,11 +26,27 @@ router.get('/', async ( req, res, next ) => {
 
 })
 
-router.get('/writer/:idUser', async ( req, res ) => {
+router.get("/:idPub", async (request, response, next) => {
+    try {
+        const { idPub } = request.params;
+        const pubID = await publication.getById(idPub);
+
+        response.json({
+            succes: true,
+            data: {
+                author: pubID,
+            },
+        });
+    } catch (error) {
+        next(error)
+    }
+});
+
+router.get('/', autoritation, async ( req, res ) => {
     try{
-        const { idUser } = req.params
-        console.log( idUser )
-        const user = await publication.getPostByUserId( idUser )
+        const token = req.headers.authorization
+        const {id} = jwt.decode(token)
+        const user = await publication.getPostByUserId( id )
 
         res.json({
             success: true,
@@ -48,18 +63,18 @@ router.get('/writer/:idUser', async ( req, res ) => {
 })
 
 
-router.post('/', autoritation,async ( req, res, next ) => {
+router.post('/', autoritation, async ( req, res ) => {
     try{
-        const { body: newPostContent } = req
-        const token = req.headers.autoritationorization
-        const { id } = jwt.decode( token )
-        console.log( id )
-        const newPost = await publication.create( newPostContent,id )
+        const newPost = req.body
+        const token = req.headers.authorization
+        const {id} = jwt.decode(token)
+
+        const newPub = await publication.create( newPost, id )
 
         res.json({
             success: true,
             data: {
-                post: newPost
+                post: newPub
             }
         })
     } catch (err) {
@@ -106,5 +121,6 @@ router.patch( '/:idPost',autoritation, async ( req, res )=>{
         })
     }
 })
+
 
 export default router

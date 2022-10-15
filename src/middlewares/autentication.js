@@ -1,4 +1,5 @@
 import jwt from '../libs/token.js'
+import errors from './errorServer.js'
 
 const autoritation = (request, response, next) => {
     try {
@@ -6,10 +7,10 @@ const autoritation = (request, response, next) => {
 
         const isValidToken = jwt.verify(token)
         if(!isValidToken) throw new Error('No autorizado')
-        request.auth = tokenDecoded.id
+        request.auth = isValidToken.id
         next()
     } catch (error) {
-        response.status(401)
+        response.errors(401)
         response.json({
             success: false,
             message: ' Denegado  ',

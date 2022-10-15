@@ -22,10 +22,10 @@ const publicationsSchema = new mongoose.Schema({
         type: Array,
         required: false
     },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comentarios' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comentarios' }, ],
     date:{
         type: Date,
-        required: true
+        required: false
     }
 })
 
