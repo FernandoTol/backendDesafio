@@ -17,7 +17,7 @@ const create = async ( newPost, user ) => {
 
 const update = (id, newUpdate) => Publication.findByIdAndUpdate(id, newUpdate, {new : true})
 
-const createComment = (id ,idComment) => Publication.findByIdAndUpdate(id, { $push: {comment: idComment} }, {new : true})
+const createComment = (id ,idComment) => Publication.findByIdAndUpdate(id, { $push:{ comments: {_id: idComment} }}, {new : true})
 
 
 export { publicationsAll, getById, getPostByUserId, deleteById, create, update, createComment }

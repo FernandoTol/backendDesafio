@@ -2,6 +2,7 @@ import express from "express";
 import * as userCases from "../useCase/user.case.js";
 import { StatusHttp } from "../libs/httpStatus.js";
 import { autoritation } from "../middlewares/autentication.js";
+import jwt from 'jsonwebtoken';
 
 
 
@@ -93,22 +94,26 @@ router.delete("/:idUser", autoritation, async (request, response, next) => {
 });
 
 // *Update
-router.patch('/:idUser', async (request, response, next) => {
+router.patch('/:idUser', autoritation, async (request, response, next) => {
     try {
         const { idUser } = request.params
         const updateUser = request.body
+        const token = request.headers.authorization
+        const { id } = jwt.decode(token)
 
-        const userUpdated = await userCases.update(idUser, updateUser)
-
-        if (!updateUser) {
-            throw new StatusHttp("author not found");
+        if (id == idUser) {
+            const userUpdated = await userCases.update(idUser, updateUser)
+            response.json({
+                succes: true,
+                data: {
+                    user: userUpdated,
+                },
+            });
+        } else {
+            response.json({
+                user: "no es tu usuario"
+            })
         }
-        response.json({
-            succes: true,
-            data: {
-                user: userUpdated,
-            },
-        });
     } catch (error) {
         next(error)
     }
