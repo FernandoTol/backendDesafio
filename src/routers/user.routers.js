@@ -98,10 +98,11 @@ router.patch('/:idUser', autoritation, async (request, response, next) => {
     try {
         const { idUser } = request.params
         const updateUser = request.body
+
         const token = request.headers.authorization
         const { id } = jwt.decode(token)
 
-        if (id == idUser) {
+        // if (id == idUser) {
             const userUpdated = await userCases.update(idUser, updateUser)
             response.json({
                 succes: true,
@@ -109,11 +110,11 @@ router.patch('/:idUser', autoritation, async (request, response, next) => {
                     user: userUpdated,
                 },
             });
-        } else {
-            response.json({
-                user: "no es tu usuario"
-            })
-        }
+        // } else {
+        //     response.json({
+        //         user: "no es tu usuario"
+        //     })
+
     } catch (error) {
         next(error)
     }
